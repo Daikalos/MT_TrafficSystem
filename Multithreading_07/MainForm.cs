@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Multithreading_07
 {
@@ -15,6 +16,30 @@ namespace Multithreading_07
         public MainForm()
         {
             InitializeComponent();
+            EnableDoubleBuffer();
+        }
+
+        private void GrpBoxTunnel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void BtnStart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnStop_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnableDoubleBuffer()
+        {
+            //Enable doublebuffer for tunnel to reduce flicker
+            typeof(GroupBox).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
+                | BindingFlags.Instance | BindingFlags.NonPublic, null,
+                GrpBoxTunnel, new object[] { true });
         }
     }
 }

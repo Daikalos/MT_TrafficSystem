@@ -56,58 +56,5 @@ namespace Multithreading_07
 
             return value;
         }
-
-        public static bool WithinBall(Ball ball, PointF point)
-        {
-            PointF ballCenter = ball.Position;
-            float ballRadians = (ball.Size.Width / 2);
-
-            float distance = Length(ballCenter.Subtract(point));
-
-            if (distance <= ballRadians)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool CheckBallCollision(Ball firstBall, Ball secondBall)
-        {
-            PointF firstBallCenter = firstBall.Position;
-            float firstBallRadians = (firstBall.Size.Width / 2);
-
-            PointF secondBallCenter = secondBall.Position;
-            float secondBallRadians = (secondBall.Size.Width / 2);
-
-            float tempDistance = (float)Math.Sqrt(
-                Math.Pow(firstBallCenter.X - secondBallCenter.X, 2) +
-                Math.Pow(firstBallCenter.Y - secondBallCenter.Y, 2));
-
-            if (tempDistance <= firstBallRadians + secondBallRadians)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public static bool CheckHoleCollision(Ball ball, Hole hole)
-        {
-            PointF ballCenter = ball.Position;
-            float ballRadians = (ball.Size.Width / 2);
-
-            PointF holeCenter = hole.Position;
-            float holeRadians = (hole.Size.Width / 2);
-
-            float tempDistance = Length(ballCenter.Subtract(holeCenter));
-
-            if (tempDistance <= ballRadians + holeRadians)
-            {
-                return true;
-            }
-
-            return false;
-        }
     }
 }
