@@ -7,11 +7,19 @@ namespace Multithreading_07
         private static readonly Random myRandom = new Random();
         private static readonly object mySyncLock = new object();
 
-        public static int RandomNumber(int aMin, int aMax)
+        public static int RandomNumber(int min, int max)
         {
             lock (mySyncLock)
-            { // synchronize
-                return myRandom.Next(aMin, aMax);
+            {
+                return myRandom.Next(min, max);
+            }
+        }
+
+        public static float RandomFloat()
+        {
+            lock (mySyncLock)
+            {
+                return (float)myRandom.NextDouble();
             }
         }
     }

@@ -8,31 +8,51 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Threading;
 
 namespace Multithreading_07
 {
-    class Car
+    class Car : ThreadObject
     {
-        private PointF myPosition;
-        private PointF myVelocity;
+        protected readonly GroupBox myGrpBoxTraffic;
+        protected readonly TrafficQueue myTrafficQueue;
+        protected readonly Tunnel myTunnel;
 
-        private Color myColor;
+        protected PointF myPosition;
+        protected PointF myVelocity;
 
-        private bool myStopCar;
-        private int myDrivingSide;
+        protected Color myColor;
+        protected Size mySize;
 
-        public Car()
+        protected bool myEnterTunnel;
+        protected bool myExitTunnel;
+
+        protected float mySpeed;
+
+        public RectangleF DrawRect => new RectangleF(myPosition.X - (mySize.Width / 2), myPosition.Y - (mySize.Height / 2), mySize.Width, mySize.Height);
+        public Color Color => myColor;
+
+        public Car(GroupBox grpBoxTraffic, TrafficQueue trafficQueue, Tunnel tunnel)
         {
+            this.myGrpBoxTraffic = grpBoxTraffic;
+            this.myTrafficQueue = trafficQueue;
+            this.myTunnel = tunnel;
 
+            mySize = new Size(32, 12);
+
+            myEnterTunnel = false;
+            myExitTunnel = false;
+
+            mySpeed = 1.5f;
 
             myColor = AssignRandomColor();
+
+            StartThread();
         }
 
-        public void Move()
+        public override void Update()
         {
-
-
-            myPosition = myPosition.Add(myVelocity);
+            //Empty, need to override
         }
 
         private Color AssignRandomColor()

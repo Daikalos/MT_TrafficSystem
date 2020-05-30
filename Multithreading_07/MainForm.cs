@@ -13,33 +13,41 @@ namespace Multithreading_07
 {
     public partial class MainForm : Form
     {
+        private Traffic myTraffic;
+        private TrafficView myDrawTraffic;
+
         public MainForm()
         {
             InitializeComponent();
             EnableDoubleBuffer();
         }
 
-        private void GrpBoxTunnel_Paint(object sender, PaintEventArgs e)
+        private void GrpBoxTraffic_Paint(object sender, PaintEventArgs e)
         {
-
+            if (myTraffic != null && myTraffic.IsRunning)
+            {
+                myDrawTraffic.Draw(sender, e);
+            }
         }
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-
+            myTraffic = new Traffic(GrpBoxTraffic);
+            myDrawTraffic = new TrafficView(GrpBoxTraffic, myTraffic);
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
         {
-
+            myTraffic.IsRunning = false;
+            myDrawTraffic.IsRunning = false;
         }
 
         private void EnableDoubleBuffer()
         {
-            //Enable doublebuffer for tunnel to reduce flicker
+            //Enable doublebuffer for traffic to reduce flicker
             typeof(GroupBox).InvokeMember("DoubleBuffered", BindingFlags.SetProperty
                 | BindingFlags.Instance | BindingFlags.NonPublic, null,
-                GrpBoxTunnel, new object[] { true });
+                GrpBoxTraffic, new object[] { true });
         }
     }
 }

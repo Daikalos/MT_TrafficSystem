@@ -71,9 +71,11 @@
     <Compile Include="Functions\StaticRandom.cs" />
     <Compile Include="Functions\ThreadObject.cs" />
     <Compile Include="Main\Car.cs" />
-    <Compile Include="Main\DrawTraffic.cs" />
+    <Compile Include="Main\TrafficView.cs" />
+    <Compile Include="Main\LeftCar.cs" />
+    <Compile Include="Main\RightCar.cs" />
     <Compile Include="Main\Traffic.cs" />
-    <Compile Include="Main\TrafficControl.cs" />
+    <Compile Include="Main\TrafficQueue.cs" />
     <Compile Include="Main\Tunnel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
