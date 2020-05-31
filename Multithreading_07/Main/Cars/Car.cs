@@ -48,6 +48,7 @@ namespace Multithreading_07
             myColor = AssignRandomColor();
 
             StartThread();
+            MyThread.Name = "Car";
         }
 
         public override void Update()

@@ -37,13 +37,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.GrpBoxRight = new System.Windows.Forms.GroupBox();
+            this.LblRightQueueCount = new System.Windows.Forms.Label();
+            this.LblRightActiveCount = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.GrpBoxTunnel = new System.Windows.Forms.GroupBox();
-            this.LblTunnelActiveCount = new System.Windows.Forms.Label();
+            this.LblTunnelLeftActiveCount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.LblRightActiveCount = new System.Windows.Forms.Label();
-            this.LblRightQueueCount = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.LblTunnelRightActiveCount = new System.Windows.Forms.Label();
             this.GrpBoxLeft.SuspendLayout();
             this.GrpBoxRight.SuspendLayout();
             this.GrpBoxTunnel.SuspendLayout();
@@ -158,6 +160,28 @@
             this.GrpBoxRight.TabStop = false;
             this.GrpBoxRight.Text = "Right Side";
             // 
+            // LblRightQueueCount
+            // 
+            this.LblRightQueueCount.AutoSize = true;
+            this.LblRightQueueCount.Font = new System.Drawing.Font("RussellSquare", 10F);
+            this.LblRightQueueCount.Location = new System.Drawing.Point(65, 41);
+            this.LblRightQueueCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
+            this.LblRightQueueCount.Name = "LblRightQueueCount";
+            this.LblRightQueueCount.Size = new System.Drawing.Size(17, 18);
+            this.LblRightQueueCount.TabIndex = 4;
+            this.LblRightQueueCount.Text = "0";
+            // 
+            // LblRightActiveCount
+            // 
+            this.LblRightActiveCount.AutoSize = true;
+            this.LblRightActiveCount.Font = new System.Drawing.Font("RussellSquare", 10F);
+            this.LblRightActiveCount.Location = new System.Drawing.Point(65, 23);
+            this.LblRightActiveCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
+            this.LblRightActiveCount.Name = "LblRightActiveCount";
+            this.LblRightActiveCount.Size = new System.Drawing.Size(17, 18);
+            this.LblRightActiveCount.TabIndex = 4;
+            this.LblRightActiveCount.Text = "0";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -183,7 +207,9 @@
             // GrpBoxTunnel
             // 
             this.GrpBoxTunnel.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.GrpBoxTunnel.Controls.Add(this.LblTunnelActiveCount);
+            this.GrpBoxTunnel.Controls.Add(this.LblTunnelRightActiveCount);
+            this.GrpBoxTunnel.Controls.Add(this.label6);
+            this.GrpBoxTunnel.Controls.Add(this.LblTunnelLeftActiveCount);
             this.GrpBoxTunnel.Controls.Add(this.label3);
             this.GrpBoxTunnel.Font = new System.Drawing.Font("RussellSquare", 12F, System.Drawing.FontStyle.Bold);
             this.GrpBoxTunnel.Location = new System.Drawing.Point(270, 146);
@@ -193,16 +219,16 @@
             this.GrpBoxTunnel.TabStop = false;
             this.GrpBoxTunnel.Text = "Tunnel Road";
             // 
-            // LblTunnelActiveCount
+            // LblTunnelLeftActiveCount
             // 
-            this.LblTunnelActiveCount.AutoSize = true;
-            this.LblTunnelActiveCount.Font = new System.Drawing.Font("RussellSquare", 10F);
-            this.LblTunnelActiveCount.Location = new System.Drawing.Point(65, 23);
-            this.LblTunnelActiveCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
-            this.LblTunnelActiveCount.Name = "LblTunnelActiveCount";
-            this.LblTunnelActiveCount.Size = new System.Drawing.Size(17, 18);
-            this.LblTunnelActiveCount.TabIndex = 4;
-            this.LblTunnelActiveCount.Text = "0";
+            this.LblTunnelLeftActiveCount.AutoSize = true;
+            this.LblTunnelLeftActiveCount.Font = new System.Drawing.Font("RussellSquare", 10F);
+            this.LblTunnelLeftActiveCount.Location = new System.Drawing.Point(99, 23);
+            this.LblTunnelLeftActiveCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
+            this.LblTunnelLeftActiveCount.Name = "LblTunnelLeftActiveCount";
+            this.LblTunnelLeftActiveCount.Size = new System.Drawing.Size(17, 18);
+            this.LblTunnelLeftActiveCount.TabIndex = 4;
+            this.LblTunnelLeftActiveCount.Text = "0";
             // 
             // label3
             // 
@@ -211,38 +237,38 @@
             this.label3.Location = new System.Drawing.Point(12, 22);
             this.label3.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 18);
+            this.label3.Size = new System.Drawing.Size(80, 18);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Active:";
+            this.label3.Text = "Left Active:";
             // 
-            // LblRightActiveCount
+            // label6
             // 
-            this.LblRightActiveCount.AutoSize = true;
-            this.LblRightActiveCount.Font = new System.Drawing.Font("RussellSquare", 10F);
-            this.LblRightActiveCount.Location = new System.Drawing.Point(65, 23);
-            this.LblRightActiveCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
-            this.LblRightActiveCount.Name = "LblRightActiveCount";
-            this.LblRightActiveCount.Size = new System.Drawing.Size(17, 18);
-            this.LblRightActiveCount.TabIndex = 4;
-            this.LblRightActiveCount.Text = "0";
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("RussellSquare", 10F);
+            this.label6.Location = new System.Drawing.Point(12, 40);
+            this.label6.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(91, 18);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Right Active:";
             // 
-            // LblRightQueueCount
+            // LblTunnelRightActiveCount
             // 
-            this.LblRightQueueCount.AutoSize = true;
-            this.LblRightQueueCount.Font = new System.Drawing.Font("RussellSquare", 10F);
-            this.LblRightQueueCount.Location = new System.Drawing.Point(65, 41);
-            this.LblRightQueueCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
-            this.LblRightQueueCount.Name = "LblRightQueueCount";
-            this.LblRightQueueCount.Size = new System.Drawing.Size(17, 18);
-            this.LblRightQueueCount.TabIndex = 4;
-            this.LblRightQueueCount.Text = "0";
+            this.LblTunnelRightActiveCount.AutoSize = true;
+            this.LblTunnelRightActiveCount.Font = new System.Drawing.Font("RussellSquare", 10F);
+            this.LblTunnelRightActiveCount.Location = new System.Drawing.Point(99, 41);
+            this.LblTunnelRightActiveCount.Margin = new System.Windows.Forms.Padding(9, 0, 3, 0);
+            this.LblTunnelRightActiveCount.Name = "LblTunnelRightActiveCount";
+            this.LblTunnelRightActiveCount.Size = new System.Drawing.Size(17, 18);
+            this.LblTunnelRightActiveCount.TabIndex = 6;
+            this.LblTunnelRightActiveCount.Text = "0";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.ClientSize = new System.Drawing.Size(789, 275);
+            this.ClientSize = new System.Drawing.Size(789, 273);
             this.Controls.Add(this.GrpBoxTunnel);
             this.Controls.Add(this.GrpBoxRight);
             this.Controls.Add(this.GrpBoxLeft);
@@ -276,9 +302,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label LblLeftQueueCount;
         private System.Windows.Forms.Label LblLeftActiveCount;
-        private System.Windows.Forms.Label LblTunnelActiveCount;
+        private System.Windows.Forms.Label LblTunnelLeftActiveCount;
         private System.Windows.Forms.Label LblRightQueueCount;
         private System.Windows.Forms.Label LblRightActiveCount;
+        private System.Windows.Forms.Label LblTunnelRightActiveCount;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -16,10 +16,14 @@ namespace Multithreading_07
         private Traffic myTraffic;
         private TrafficView myDrawTraffic;
 
+        public static MainForm Form;
+
         public MainForm()
         {
             InitializeComponent();
             EnableDoubleBuffer();
+
+            Form = this;
         }
 
         private void GrpBoxTraffic_Paint(object sender, PaintEventArgs e)
@@ -40,6 +44,42 @@ namespace Multithreading_07
         {
             myTraffic.IsRunning = false;
             myDrawTraffic.IsRunning = false;
+        }
+
+        public void UpdateLeftSideStatus(int activeCount, int queueCount)
+        {
+            LblLeftActiveCount.InvokeIfRequired(() =>
+            {
+                LblLeftActiveCount.Text = activeCount.ToString();
+            });
+            LblLeftQueueCount.InvokeIfRequired(() =>
+            {
+                LblLeftQueueCount.Text = queueCount.ToString();
+            });
+        }
+
+        public void UpdateTunnelStatus(int leftActiveCount, int rightActiveCount)
+        {
+            LblTunnelLeftActiveCount.InvokeIfRequired(() =>
+            {
+                LblTunnelLeftActiveCount.Text = leftActiveCount.ToString();
+            });
+            LblTunnelRightActiveCount.InvokeIfRequired(() =>
+            {
+                LblTunnelRightActiveCount.Text = rightActiveCount.ToString();
+            });
+        }
+
+        public void UpdateRightSideStatus(int activeCount, int queueCount)
+        {
+            LblRightActiveCount.InvokeIfRequired(() =>
+            {
+                LblRightActiveCount.Text = activeCount.ToString();
+            });
+            LblRightQueueCount.InvokeIfRequired(() =>
+            {
+                LblRightQueueCount.Text = queueCount.ToString();
+            });
         }
 
         private void EnableDoubleBuffer()

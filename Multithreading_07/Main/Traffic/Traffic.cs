@@ -15,16 +15,40 @@ namespace Multithreading_07
 {
     class Traffic : ThreadObject
     {
-        private GroupBox myGrpBoxTraffic;
+        private readonly GroupBox myGrpBoxTraffic;
 
         private readonly List<Car> myCars;
         private readonly TrafficQueue myTrafficQueue;
         private readonly Tunnel myTunnel;
 
-        private float mySpawnCarDelay;
+        private readonly object mySyncRemove = new object(); //Used to prevent out-of-sync error when getting car count
+
+        private readonly float mySpawnCarDelay;
 
         public List<Car> Cars => myCars;
-        public Tunnel tunnel => myTunnel;
+        public TrafficQueue TrafficQueue => myTrafficQueue;
+        public Tunnel Tunnel => myTunnel;
+
+        public int LeftCarCount 
+        {
+            get
+            { 
+                lock (mySyncRemove) 
+                { 
+                    return myCars.Count(b => b is LeftCar); 
+                } 
+            } 
+        }
+        public int RightCarCount
+        {
+            get
+            {
+                lock (mySyncRemove)
+                {
+                    return myCars.Count(b => b is RightCar);
+                }
+            }
+        }
 
         public Traffic(GroupBox grpBoxTraffic)
         {
@@ -37,10 +61,11 @@ namespace Multithreading_07
             mySpawnCarDelay = 2.0f;
 
             StartThread();
+            MyThread.Name = "Traffic";
         }
 
         /// <summary>
-        /// Spawns a car after having reached delay time
+        /// Controls spawn and removal -logic of cars
         /// </summary>
         public override void Update()
         {
@@ -63,26 +88,36 @@ namespace Multithreading_07
                     spawnCarTimer.Restart();
                 }
 
-                for (int i = myCars.Count - 1; i >= 0; i--)
-                {
-                    if (!myCars[i].IsRunning)
-                    {
-                        myCars.RemoveAt(i);
-                    }
-                }
+                RemoveInactiveCars();
             }
 
             myCars.ForEach(c => c.IsRunning = false);
+        }
+
+        /// <summary>
+        /// Whenever a car is no longer running, remove from list
+        /// </summary>
+        private void RemoveInactiveCars()
+        {
+            for (int i = myCars.Count - 1; i >= 0; i--)
+            {
+                if (!myCars[i].IsRunning)
+                {
+                    RemoveCar(myCars[i]);
+                }
+            }
         }
 
         public void AddCar(Car carToAdd)
         {
             myCars.Add(carToAdd);
         }
-
         public void RemoveCar(Car carToRemove)
         {
-            myCars.Remove(carToRemove);
+            lock (mySyncRemove)
+            {
+                myCars.Remove(carToRemove);
+            }
         }
     }
 }

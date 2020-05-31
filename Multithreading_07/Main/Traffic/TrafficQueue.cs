@@ -20,8 +20,8 @@ namespace Multithreading_07
         private readonly object mySyncLeftCarQueue = new object();
         private readonly object mySyncRightCarQueue = new object();
 
-        private int myLeftMaxCount;
-        private int myRightMaxCount;
+        private readonly int myLeftMaxCount;
+        private readonly int myRightMaxCount;
 
         public Queue<LeftCar> LeftCarQueue => myLeftCarQueue;
         public Queue<RightCar> RightCarQueue => myRightCarQueue;

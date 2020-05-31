@@ -31,6 +31,8 @@ namespace Multithreading_07
 
                 if (!myEnterTunnel)
                 {
+                    QueueLeftSide();
+
                     myEnterTunnel = EnteringLeftSide();
                 }
                 if (!myExitTunnel)
@@ -57,7 +59,7 @@ namespace Multithreading_07
             if (!myTrafficQueue.LeftCarQueue.Contains(this))
             {
                 //Check for if the car has passed the waiting position of the total cars in queue
-                if (myPosition.X + (mySize.Width / 2) + carCheckWaitPos > myTunnel.Position.X - (myTunnel.Size.Width / 2))
+                if (myPosition.X + (mySize.Width / 2) + carCheckWaitPos >= myTunnel.TunnelEntryLeftSide)
                 {
                     myTrafficQueue.AddToLeftQueue(this);
                 }
@@ -65,21 +67,19 @@ namespace Multithreading_07
             else
             {
                 //If the car is in the queue and has reached wait pos, set the position to the waiting position
-                if (myPosition.X > myTunnel.Position.X - (myTunnel.Size.Width / 2) - (mySize.Width / 2) - carWaitPos)
+                if (myPosition.X + (mySize.Width / 2) + carWaitPos >= myTunnel.TunnelEntryLeftSide)
                 {
-                    myPosition = new PointF(myTunnel.Position.X - (myTunnel.Size.Width / 2) - (mySize.Width / 2) - carWaitPos, myPosition.Y);
+                    myPosition = new PointF(myTunnel.TunnelEntryLeftSide - (mySize.Width / 2) - carWaitPos, myPosition.Y);
                 }
             }
         }
 
         private bool EnteringLeftSide()
         {
-            QueueLeftSide();
-
             //If the car is in the queue, is first to enter and has reached tunnel entry
             if (myTrafficQueue.LeftCarQueue.Contains(this))
             {
-                if (myTrafficQueue.PositionInLeftQueue(this) == 0 && myPosition.X >= myTunnel.Position.X - (myTunnel.Size.Width / 2) - (mySize.Width / 2))
+                if (myTrafficQueue.PositionInLeftQueue(this) == 0 && myPosition.X + (mySize.Width / 2) >= myTunnel.TunnelEntryLeftSide)
                 {
                     EnterTunnelLeftSide();
 
@@ -98,7 +98,7 @@ namespace Multithreading_07
 
         private bool ExitingRightSide()
         {
-            if (myPosition.X + (mySize.Width / 2) > myTunnel.Position.X + (myTunnel.Size.Width / 2))
+            if (myPosition.X + (mySize.Width / 2) >= myTunnel.TunnelEntryRightSide)
             {
                 ExitTunnelRightSide();
 

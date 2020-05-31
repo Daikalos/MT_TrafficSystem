@@ -31,6 +31,8 @@ namespace Multithreading_07
 
                 if (!myEnterTunnel)
                 {
+                    QueueRightSide();
+
                     myEnterTunnel = EnteringRightSide();
                 }
                 if (!myExitTunnel)
@@ -56,7 +58,7 @@ namespace Multithreading_07
             if (!myTrafficQueue.RightCarQueue.Contains(this))
             {
                 //Check for if the car has passed the waiting position of the total cars in queue
-                if (myPosition.X - (mySize.Width / 2) - carCheckWaitPos < myTunnel.Position.X + (myTunnel.Size.Width / 2))
+                if (myPosition.X - (mySize.Width / 2) - carCheckWaitPos <= myTunnel.TunnelEntryRightSide)
                 {
                     myTrafficQueue.AddToRightQueue(this);
                 }
@@ -64,21 +66,19 @@ namespace Multithreading_07
             else
             {
                 //If the car is in the queue, set the position to the waiting position
-                if (myPosition.X < myTunnel.Position.X + (myTunnel.Size.Width / 2) + (mySize.Width / 2) + carWaitPos)
+                if (myPosition.X - (mySize.Width / 2) - carWaitPos <= myTunnel.TunnelEntryRightSide)
                 {
-                    myPosition = new PointF(myTunnel.Position.X + (myTunnel.Size.Width / 2) + (mySize.Width / 2) + carWaitPos, myPosition.Y);
+                    myPosition = new PointF(myTunnel.TunnelEntryRightSide + (mySize.Width / 2) + carWaitPos, myPosition.Y);
                 }
             }
         }
 
         private bool EnteringRightSide()
         {
-            QueueRightSide();
-
             //If the car is in the queue, is first to enter and has reached tunnel entry
             if (myTrafficQueue.RightCarQueue.Contains(this))
             {
-                if (myTrafficQueue.PositionInRightQueue(this) == 0 && myPosition.X <= myTunnel.Position.X + (myTunnel.Size.Width / 2) + (mySize.Width / 2))
+                if (myTrafficQueue.PositionInRightQueue(this) == 0 && myPosition.X <= myTunnel.TunnelEntryRightSide + (mySize.Width / 2))
                 {
                     EnterTunnelRightSide();
 
