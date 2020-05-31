@@ -60,13 +60,13 @@ namespace Multithreading_07
 
             if (myTrafficLights.SwitchAllowEntry)
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(200, 100, 20, 20));
-                e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(548, 100, 20, 20));
+                e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(548, 100, 20, 20));
+                e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(200, 100, 20, 20));
             }
             else
             {
-                e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(548, 100, 20, 20));
-                e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(200, 100, 20, 20));
+                e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(200, 100, 20, 20));
+                e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(548, 100, 20, 20));
             }
         }
     }

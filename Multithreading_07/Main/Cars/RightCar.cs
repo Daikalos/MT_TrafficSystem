@@ -29,17 +29,21 @@ namespace Multithreading_07
             {
                 Thread.Sleep((int)((1.0f / 60.0f) * 1000));
 
+                //When having spawned while on the way to enter the tunnel
                 if (!myEnterTunnel)
                 {
                     QueueRightSide();
 
                     myEnterTunnel = EnteringRightSide();
                 }
+
+                //When having entered the tunnel while on the way to exit the tunnel
                 if (!myExitTunnel)
                 {
                     myExitTunnel = ExitingLeftSide();
                 }
 
+                //When having entered and left the tunnel, will be removed when outside the group box
                 if (myEnterTunnel && myExitTunnel)
                 {
                     OutsideLeftBoundary();
@@ -58,7 +62,7 @@ namespace Multithreading_07
             if (!myTrafficQueue.RightCarQueue.Contains(this))
             {
                 //Check for if the car has passed the waiting position of the total cars in queue
-                if (myPosition.X - (mySize.Width / 2) - carCheckWaitPos <= myTunnel.TunnelEntryRightSide)
+                if (myPosition.X - (mySize.Width / 2) - carCheckWaitPos <= myTunnel.RightSide)
                 {
                     myTrafficQueue.AddToRightQueue(this);
                 }
@@ -66,9 +70,9 @@ namespace Multithreading_07
             else
             {
                 //If the car is in the queue, set the position to the waiting position
-                if (myPosition.X - (mySize.Width / 2) - carWaitPos <= myTunnel.TunnelEntryRightSide)
+                if (myPosition.X - (mySize.Width / 2) - carWaitPos <= myTunnel.RightSide)
                 {
-                    myPosition = new PointF(myTunnel.TunnelEntryRightSide + (mySize.Width / 2) + carWaitPos, myPosition.Y);
+                    myPosition = new PointF(myTunnel.RightSide + (mySize.Width / 2) + carWaitPos, myPosition.Y);
                 }
             }
         }
@@ -78,7 +82,7 @@ namespace Multithreading_07
             //If the car is in the queue, is first to enter and has reached tunnel entry
             if (myTrafficQueue.RightCarQueue.Contains(this))
             {
-                if (myTrafficQueue.PositionInRightQueue(this) == 0 && myPosition.X <= myTunnel.TunnelEntryRightSide + (mySize.Width / 2))
+                if (myTrafficQueue.PositionInRightQueue(this) == 0 && myPosition.X <= myTunnel.RightSide + (mySize.Width / 2))
                 {
                     EnterTunnelRightSide();
 
@@ -88,16 +92,19 @@ namespace Multithreading_07
             return false;
         }
         private void EnterTunnelRightSide()
-        {
+        {            
+            //Attempt to enter the tunnel
             myTunnel.EnterTunnelRightSide();
-            myTrafficQueue.RemoveFromRightQueue();
 
+            //If the car has successfully entered the tunnel, remove from queue
+            myTrafficQueue.RemoveFromRightQueue();
             myPosition = new PointF(myPosition.X, myGrpBoxTraffic.Height / 2);
         }
 
         private bool ExitingLeftSide()
         {
-            if (myPosition.X - (mySize.Width / 2) < myTunnel.Position.X - (myTunnel.Size.Width / 2))
+            //If the car has reached the left side of the tunnel
+            if (myPosition.X - (mySize.Width / 2) <= myTunnel.LeftSide)
             {
                 ExitTunnelLeftSide();
 
@@ -107,9 +114,9 @@ namespace Multithreading_07
         }
         private void ExitTunnelLeftSide()
         {
-            myPosition = new PointF(myPosition.X, (myGrpBoxTraffic.Height / 2) - (mySize.Height / 2) - 4);
-
             myTunnel.ExitTunnelLeftSide();
+
+            myPosition = new PointF(myPosition.X, (myGrpBoxTraffic.Height / 2) - (mySize.Height / 2) - 4);
         }
 
         private void OutsideLeftBoundary()

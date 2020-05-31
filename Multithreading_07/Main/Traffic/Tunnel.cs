@@ -16,17 +16,17 @@ namespace Multithreading_07
     {
         private readonly GroupBox myGrpBoxTraffic;
 
-        private readonly SemaphoreSlim myPassingLeftCars;
-        private readonly SemaphoreSlim myPassingRightCars;
+        private readonly SemaphoreSlim myPassingLeftCars;  //Used for cars to wait if tunnel has reached max passing cars
+        private readonly SemaphoreSlim myPassingRightCars; //Not used as a method for counting total active cars in tunnel
 
         private readonly TrafficLights myTrafficLights;
 
-        private PointF myPosition;
-        private Size mySize;
+        private PointF myPosition; //Position of tunnel
+        private Size mySize;       //Size of tunnel
 
-        private int myMaxPassingCars;
+        private int myMaxPassingCars; //Maximum amount of cars that can pass through tunnel at once
 
-        private int myLeftPassingCarsCount;
+        private int myLeftPassingCarsCount; //Amount of cars that are currently passing through tunnel
         private int myRightPassingCarsCount;
 
         public TrafficLights TrafficLights => myTrafficLights;
@@ -34,8 +34,8 @@ namespace Multithreading_07
         public PointF Position => myPosition;
         public Size Size => mySize;
 
-        public int TunnelEntryLeftSide => (int)(myPosition.X - (mySize.Width / 2));
-        public int TunnelEntryRightSide => (int)(myPosition.X + (mySize.Width / 2));
+        public int LeftSide => (int)(myPosition.X - (mySize.Width / 2));
+        public int RightSide => (int)(myPosition.X + (mySize.Width / 2));
 
         public int PassingLeftCarsCount => myLeftPassingCarsCount;
         public int PassingRightCarsCount => myRightPassingCarsCount;
@@ -59,12 +59,14 @@ namespace Multithreading_07
             myPassingLeftCars.Wait();
             myTrafficLights.StopEntryLeft();
 
+            //If the car is allowed entry, increase counter
             myLeftPassingCarsCount++;
         }
         public void ExitTunnelRightSide()
         {
             myPassingLeftCars.Release();
 
+            //If the car has left the tunnel, reduce counter
             myLeftPassingCarsCount--;
         }
 

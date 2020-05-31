@@ -21,7 +21,7 @@ namespace Multithreading_07
         private readonly TrafficQueue myTrafficQueue;
         private readonly Tunnel myTunnel;
 
-        private readonly object mySyncRemove = new object(); //Used to prevent out-of-sync error when getting car count
+        private readonly object mySyncCarList = new object(); //Used to prevent out-of-sync error when getting car count
 
         private readonly float mySpawnCarDelay;
 
@@ -33,7 +33,7 @@ namespace Multithreading_07
         {
             get
             { 
-                lock (mySyncRemove) 
+                lock (mySyncCarList) 
                 { 
                     return myCars.Count(b => b is LeftCar); 
                 } 
@@ -43,7 +43,7 @@ namespace Multithreading_07
         {
             get
             {
-                lock (mySyncRemove)
+                lock (mySyncCarList)
                 {
                     return myCars.Count(b => b is RightCar);
                 }
@@ -110,11 +110,14 @@ namespace Multithreading_07
 
         public void AddCar(Car carToAdd)
         {
-            myCars.Add(carToAdd);
+            lock (mySyncCarList)
+            {
+                myCars.Add(carToAdd);
+            }
         }
         public void RemoveCar(Car carToRemove)
         {
-            lock (mySyncRemove)
+            lock (mySyncCarList)
             {
                 myCars.Remove(carToRemove);
             }

@@ -12,7 +12,7 @@ namespace Multithreading_07
     {
         private Tunnel myTunnel;
 
-        private CurrentAllowEntry myCurrentAllowEntry;
+        private CurrentAllowEntry myCurrentAllowEntry; //Used to switch which side to notify that is waiting
 
         private readonly object myAllowEntryLeft = new object();
         private readonly object myAllowEntryRight = new object();
@@ -41,6 +41,7 @@ namespace Multithreading_07
 
             while (IsRunning)
             {
+                //If the timer reached delay, switch which side is allowed to enter
                 if ((float)switchEntryTimer.Elapsed.TotalSeconds >= mySwitchEntryDelay)
                 {
                     mySwitchAllowEntry = !mySwitchAllowEntry;
@@ -56,6 +57,7 @@ namespace Multithreading_07
                     switchEntryTimer.Restart();
                 }
 
+                //Notify each waiting car to be allowed to pass
                 myCurrentAllowEntry();
             }
         }
@@ -64,6 +66,7 @@ namespace Multithreading_07
 
         public void StopEntryLeft()
         {
+            //Wait until notified
             lock (myAllowEntryLeft)
             {
                 Monitor.Wait(myAllowEntryLeft);
@@ -71,17 +74,19 @@ namespace Multithreading_07
         }
         public void AllowEntryLeft()
         {
-            if (myTunnel.PassingLeftCarsCount == 0)
+            //If there are currently no passing cars from opposite side, notify left car to be allowed to pass
+            if (myTunnel.PassingRightCarsCount == 0)
             {
-                lock (myAllowEntryRight)
+                lock (myAllowEntryLeft)
                 {
-                    Monitor.Pulse(myAllowEntryRight);
+                    Monitor.Pulse(myAllowEntryLeft);
                 }
             }
         }
 
         public void StopEntryRight()
         {
+            //Wait until notified
             lock (myAllowEntryRight)
             {
                 Monitor.Wait(myAllowEntryRight);
@@ -89,11 +94,12 @@ namespace Multithreading_07
         }
         public void AllowEntryRight()
         {
-            if (myTunnel.PassingRightCarsCount == 0)
+            //If there are currently no passing cars from opposite side, notify right car to be allowed to pass
+            if (myTunnel.PassingLeftCarsCount == 0)
             {
-                lock (myAllowEntryLeft)
+                lock (myAllowEntryRight)
                 {
-                    Monitor.Pulse(myAllowEntryLeft);
+                    Monitor.Pulse(myAllowEntryRight);
                 }
             }
         }
