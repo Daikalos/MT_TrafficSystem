@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Threading;
 
 namespace Multithreading_07
@@ -38,7 +30,7 @@ namespace Multithreading_07
                 }
 
                 //When having entered the tunnel while on the way to exit the tunnel
-                if (!myExitTunnel)
+                if (myEnterTunnel && !myExitTunnel)
                 {
                     myExitTunnel = ExitingLeftSide();
                 }
@@ -103,7 +95,7 @@ namespace Multithreading_07
 
         private bool ExitingLeftSide()
         {
-            //If the car has reached the left side of the tunnel
+            //If the car has reached the left side of the tunnel (exit)
             if (myPosition.X - (mySize.Width / 2) <= myTunnel.LeftSide)
             {
                 ExitTunnelLeftSide();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Threading;
 using System.Diagnostics;
 
 namespace Multithreading_07
@@ -17,7 +12,7 @@ namespace Multithreading_07
         private readonly object myAllowEntryLeft = new object();
         private readonly object myAllowEntryRight = new object();
 
-        private bool mySwitchAllowEntry;
+        private bool mySwitchAllowEntry; 
         private float mySwitchEntryDelay;
 
         public bool SwitchAllowEntry => mySwitchAllowEntry;
@@ -57,7 +52,7 @@ namespace Multithreading_07
                     switchEntryTimer.Restart();
                 }
 
-                //Notify each waiting car to be allowed to pass
+                //Notify the currently waiting car to be allowed to pass
                 myCurrentAllowEntry();
             }
         }

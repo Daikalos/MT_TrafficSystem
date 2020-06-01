@@ -1,23 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Reflection;
-using System.Threading;
 
 namespace Multithreading_07
 {
     class TrafficQueue
     {
-        private readonly Queue<LeftCar> myLeftCarQueue;
+        private readonly Queue<LeftCar> myLeftCarQueue;  //Queue of cars waiting to enter the tunnel
         private readonly Queue<RightCar> myRightCarQueue;
 
-        private readonly object mySyncLeftCarQueue = new object();
+        private readonly object mySyncLeftCarQueue = new object(); //Sync access to queue to prevent out-of-sync error
         private readonly object mySyncRightCarQueue = new object();
 
         private readonly int myLeftMaxCount;

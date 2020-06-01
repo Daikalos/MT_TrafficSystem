@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Diagnostics;
-using System.Threading;
 
 namespace Multithreading_07
 {
@@ -92,6 +84,7 @@ namespace Multithreading_07
             }
 
             myCars.ForEach(c => c.IsRunning = false);
+            myTunnel.TrafficLights.IsRunning = false;
         }
 
         /// <summary>

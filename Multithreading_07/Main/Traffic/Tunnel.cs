@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using System.Reflection;
 using System.Threading;
 
 namespace Multithreading_07
@@ -19,7 +11,7 @@ namespace Multithreading_07
         private readonly SemaphoreSlim myPassingLeftCars;  //Used for cars to wait if tunnel has reached max passing cars
         private readonly SemaphoreSlim myPassingRightCars; //Not used as a method for counting total active cars in tunnel
 
-        private readonly TrafficLights myTrafficLights;
+        private readonly TrafficLights myTrafficLights; //Traffic Lights used to control which side is currently allowed to pass
 
         private PointF myPosition; //Position of tunnel
         private Size mySize;       //Size of tunnel
