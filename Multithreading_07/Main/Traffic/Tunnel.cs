@@ -43,12 +43,15 @@ namespace Multithreading_07
             myTrafficLights = new TrafficLights(this);
 
             myPosition = new PointF((grpBoxTraffic.Width / 2), (grpBoxTraffic.Height / 2));
-            mySize = new Size(321, 61);
+            mySize = new Size(203, 61);
         }
 
         public void EnterTunnelLeftSide()
         {
+            //Check first if the tunnel is not full from this side
             myPassingLeftCars.Wait();
+
+            //Stop car at entry until notified
             myTrafficLights.StopEntryLeft();
 
             //If the car is allowed entry, increase counter
@@ -64,15 +67,20 @@ namespace Multithreading_07
 
         public void EnterTunnelRightSide()
         {
+            //Check first if the tunnel is not full from this side
             myPassingRightCars.Wait();
+
+            //Stop car at entry until notified
             myTrafficLights.StopEntryRight();
 
+            //If the car is allowed entry, increase counter
             myRightPassingCarsCount++;
         }
         public void ExitTunnelLeftSide()
         {
             myPassingRightCars.Release();
 
+            //If the car has left the tunnel, reduce counter
             myRightPassingCarsCount--;
         }
     }

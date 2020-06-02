@@ -29,14 +29,22 @@ namespace Multithreading_07
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            myTraffic = new Traffic(GrpBoxTraffic);
-            myDrawTraffic = new TrafficView(GrpBoxTraffic, myTraffic);
+            //Start traffic only if the thread is not alive
+            if (myTraffic == null || !myTraffic.MyThread.IsAlive)
+            {
+                myTraffic = new Traffic(GrpBoxTraffic);
+                myDrawTraffic = new TrafficView(GrpBoxTraffic, myTraffic);
+            }
         }
 
         private void BtnStop_Click(object sender, EventArgs e)
         {
-            myTraffic.IsRunning = false;
-            myDrawTraffic.IsRunning = false;
+            //Stop traffic only if the thread is alive
+            if (myTraffic != null && myTraffic.MyThread.IsAlive)
+            {
+                myTraffic.IsRunning = false;
+                myDrawTraffic.IsRunning = false;
+            }
         }
 
         public void UpdateLeftSideStatus(int activeCount, int queueCount)
