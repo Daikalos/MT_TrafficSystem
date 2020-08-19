@@ -5,15 +5,15 @@ namespace Multithreading_07
 {
     class TrafficLights : ThreadObject
     {
-        private Tunnel myTunnel;
+        private Tunnel myTunnel; //Used to check how many are currently in the tunnel
 
         private CurrentAllowEntry myCurrentAllowEntry; //Used to switch which side to notify that is waiting
 
-        private readonly object myAllowEntryLeft = new object();
+        private readonly object myAllowEntryLeft = new object();  //Used as condition synchronization for waiting/notifying cars
         private readonly object myAllowEntryRight = new object();
 
-        private bool mySwitchAllowEntry; 
-        private float mySwitchEntryDelay;
+        private bool mySwitchAllowEntry;  //Currently which side is being notified
+        private float mySwitchEntryDelay; //Delay before traffic lights switches sides
 
         public bool SwitchAllowEntry => mySwitchAllowEntry;
 
@@ -24,7 +24,7 @@ namespace Multithreading_07
             myCurrentAllowEntry = AllowEntryLeft;
 
             mySwitchAllowEntry = true;
-            mySwitchEntryDelay = 14.0f;
+            mySwitchEntryDelay = 12.0f;
 
             StartThread();
             MyThread.Name = "TrafficLights";
@@ -36,18 +36,11 @@ namespace Multithreading_07
 
             while (IsRunning)
             {
-                //If the timer reached delay, switch which side is allowed to enter
+                //If the timer reaches delay, switch which side is allowed to enter
                 if ((float)switchEntryTimer.Elapsed.TotalSeconds >= mySwitchEntryDelay)
                 {
                     mySwitchAllowEntry = !mySwitchAllowEntry;
-                    if (mySwitchAllowEntry)
-                    {
-                        myCurrentAllowEntry = AllowEntryLeft;
-                    }
-                    else
-                    {
-                        myCurrentAllowEntry = AllowEntryRight;
-                    }
+                    myCurrentAllowEntry =  (mySwitchAllowEntry) ? new CurrentAllowEntry(AllowEntryLeft) : AllowEntryRight;
 
                     switchEntryTimer.Restart();
                 }
@@ -61,7 +54,7 @@ namespace Multithreading_07
 
         public void StopEntryLeft()
         {
-            //Wait until notified
+            //Wait at entry until notified
             lock (myAllowEntryLeft)
             {
                 Monitor.Wait(myAllowEntryLeft);
@@ -81,7 +74,7 @@ namespace Multithreading_07
 
         public void StopEntryRight()
         {
-            //Wait until notified
+            //Wait at entry until notified
             lock (myAllowEntryRight)
             {
                 Monitor.Wait(myAllowEntryRight);

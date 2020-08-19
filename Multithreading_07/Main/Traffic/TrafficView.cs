@@ -31,12 +31,14 @@ namespace Multithreading_07
             {
                 Thread.Sleep((int)((1.0f / 30.0f) * 1000));
 
+                //Update status in form
                 MainForm.Form.UpdateLeftSideStatus(myTraffic.LeftCarCount, myTrafficQueue.LeftCarQueue.Count);
                 MainForm.Form.UpdateTunnelStatus(myTunnel.PassingLeftCarsCount, myTunnel.PassingRightCarsCount);
                 MainForm.Form.UpdateRightSideStatus(myTraffic.RightCarCount, myTrafficQueue.RightCarQueue.Count);
 
                 myGrpBoxTraffic.InvokeIfRequired(() => 
                 {
+                    //Refresh traffic to show latest update
                     myGrpBoxTraffic.Refresh();
                 });
             }
@@ -52,11 +54,13 @@ namespace Multithreading_07
 
             if (myTrafficLights.SwitchAllowEntry)
             {
+                //Left side allowed entry
                 e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(548, 100, 20, 20));
                 e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(200, 100, 20, 20));
             }
             else
             {
+                //Right side allowed entry
                 e.Graphics.FillRectangle(new SolidBrush(Color.Red), new RectangleF(200, 100, 20, 20));
                 e.Graphics.FillRectangle(new SolidBrush(Color.Green), new RectangleF(548, 100, 20, 20));
             }

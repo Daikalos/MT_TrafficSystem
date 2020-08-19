@@ -10,8 +10,8 @@ namespace Multithreading_07
         private readonly GroupBox myGrpBoxTraffic;
 
         private readonly List<Car> myCars;
-        private readonly TrafficQueue myTrafficQueue;
-        private readonly Tunnel myTunnel;
+        private readonly TrafficQueue myTrafficQueue; //Queue created at entry of tunnel
+        private readonly Tunnel myTunnel;             //Tunnnel object, also used for controlling safe-way passage through tunnel
 
         private readonly object mySyncCarList = new object(); //Used to prevent out-of-sync error when getting car count
 

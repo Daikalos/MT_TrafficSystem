@@ -67,7 +67,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functions\Extensions.cs" />
+    <Compile Include="Functions\Utilities.cs" />
     <Compile Include="Functions\StaticRandom.cs" />
     <Compile Include="Functions\ThreadObject.cs" />
     <Compile Include="Main\Cars\Car.cs" />

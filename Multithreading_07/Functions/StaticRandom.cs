@@ -14,13 +14,5 @@ namespace Multithreading_07
                 return myRandom.Next(min, max);
             }
         }
-
-        public static float RandomFloat()
-        {
-            lock (mySyncLock)
-            {
-                return (float)myRandom.NextDouble();
-            }
-        }
     }
 }

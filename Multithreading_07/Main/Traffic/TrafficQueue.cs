@@ -11,7 +11,7 @@ namespace Multithreading_07
         private readonly object mySyncLeftCarQueue = new object(); //Sync access to queue to prevent out-of-sync error
         private readonly object mySyncRightCarQueue = new object();
 
-        private readonly int myLeftMaxCount;
+        private readonly int myLeftMaxCount; //Max count used to control amount of cars allowed to spawn in traffic
         private readonly int myRightMaxCount;
 
         public Queue<LeftCar> LeftCarQueue => myLeftCarQueue;

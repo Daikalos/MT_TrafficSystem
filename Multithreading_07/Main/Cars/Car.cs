@@ -12,6 +12,9 @@ using System.Threading;
 
 namespace Multithreading_07
 {
+    /// <summary>
+    /// Blueprint for cars
+    /// </summary>
     class Car : ThreadObject
     {
         protected readonly GroupBox myGrpBoxTraffic;
