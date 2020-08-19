@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Threading;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     class TrafficView : ThreadObject
     {

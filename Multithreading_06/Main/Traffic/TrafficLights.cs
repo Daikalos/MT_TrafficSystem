@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Diagnostics;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     class TrafficLights : ThreadObject
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     class Traffic : ThreadObject
     {

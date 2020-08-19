@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     class TrafficQueue
     {

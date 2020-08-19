@@ -1,4 +1,4 @@
-﻿namespace Multithreading_07
+﻿namespace Multithreading_06
 {
     partial class MainForm
     {
@@ -76,7 +76,7 @@
             // GrpBoxTraffic
             // 
             this.GrpBoxTraffic.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.GrpBoxTraffic.BackgroundImage = global::Multithreading_07.Properties.Resources.tunnel;
+            this.GrpBoxTraffic.BackgroundImage = global::Multithreading_06.Properties.Resources.tunnel;
             this.GrpBoxTraffic.Font = new System.Drawing.Font("RussellSquare", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GrpBoxTraffic.Location = new System.Drawing.Point(12, 12);
             this.GrpBoxTraffic.Name = "GrpBoxTraffic";
@@ -276,7 +276,7 @@
             this.Controls.Add(this.BtnStop);
             this.Controls.Add(this.BtnStart);
             this.Name = "MainForm";
-            this.Text = "Multithreading_07";
+            this.Text = "Multithreading_06";
             this.GrpBoxLeft.ResumeLayout(false);
             this.GrpBoxLeft.PerformLayout();
             this.GrpBoxRight.ResumeLayout(false);

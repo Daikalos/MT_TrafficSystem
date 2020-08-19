@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     static class Program
     {

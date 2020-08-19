@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.Reflection;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     public partial class MainForm : Form
     {

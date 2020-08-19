@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 
-namespace Multithreading_07
+namespace Multithreading_06
 {
     /// <summary>
     /// Blueprint for cars
